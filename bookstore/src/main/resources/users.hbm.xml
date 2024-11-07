@@ -1,0 +1,16 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class table="users" name="com.library.models.User">
+        <id name="id" column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name" column="name"/>
+        <property name="department" column="department" />
+        <property name="designation" column="designation" />
+                <set name="books" table="books_users" inverse="true" cascade="all" lazy="false"> 
+            <key column="user_id" />
+            <many-to-many column="book_id" class="com.library.models.Book" />
+        </set>
+
+    </class>
+</hibernate-mapping>
