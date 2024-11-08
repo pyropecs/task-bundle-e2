@@ -27,36 +27,35 @@ public class BookController {
     @PostMapping("/books/add")
     public String createBook(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
 
+        String message;
         try {
-            
-            repository.insertBook(book);
-            redirectAttributes.addFlashAttribute("message", "Book Created Successfully");
-            redirectAttributes.addFlashAttribute("path","books");
-            
+        repository.insertBook(book);
+        message ="Book Created Successfully" ;
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("message", "Internal Server Error");
-            redirectAttributes.addFlashAttribute("path","books");
-          
+            message = "Internal Server Error";
         }
+        redirectAttributes.addFlashAttribute("message", message);
+        redirectAttributes.addFlashAttribute("path","books");
         return "redirect:/books";
     }
 
     @PostMapping("/addusers/insert")
     public String insertUsersToBook(@ModelAttribute AdduserToBookForm form, RedirectAttributes redirectAttributes) {
-
+        String message;
         try {
             repository.insertUsersToBook(form.getBookId(), form.getUserIds());
-            redirectAttributes.addFlashAttribute("message", "Users added to the book sucessfully");
-           
+   
+           message="Users added to the book sucessfully";
         } catch (Exception e) {
             System.out.println("Exception occured:" + "AddUserBookController.insertUsersToBook()");
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("message", "Internal Server Error");
+            message = "Internal Server Error";
             
         }
+        redirectAttributes.addFlashAttribute("message",message);
         return "redirect:/addusers";
     }
 

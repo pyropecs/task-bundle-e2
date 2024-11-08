@@ -95,11 +95,23 @@ function hasLeadingOrTrailingSpaces(str) {
 function checkEmptySelected() {
   const bookSelect = document.querySelector("#bookselect");
   const bookSelectError = document.querySelector("#select-error");
+  const checkBoxes = document.querySelectorAll(".checkbox");
+  let matchedLengths = 0;
+  checkBoxes.forEach((checkBox)=>{
+    if(checkBox.checked){
+      matchedLengths++;
+    }
+  })
 
   let isNotError = true;
   bookSelectError.classList.remove("show");
   if (bookSelect.value === "") {
     bookSelectError.textContent = "Book is required";
+    bookSelectError.classList.add("show");
+    isNotError = !isNotError;
+  }
+  if(matchedLengths === 0 ){
+    bookSelectError.textContent = "No Users is selected";
     bookSelectError.classList.add("show");
     isNotError = !isNotError;
   }
@@ -157,6 +169,7 @@ async function getUsers(e) {
   const response = await fetch(`users/all/${selectedValue}`);
   const results = await response.json();
   const checkBoxes = document.querySelectorAll(".checkbox");
+
   checkBoxes.forEach((checkBox) => {
     const checkBoxValue = Number(checkBox.value);
 

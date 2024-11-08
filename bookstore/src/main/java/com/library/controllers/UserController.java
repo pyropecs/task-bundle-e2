@@ -67,20 +67,19 @@ public class UserController {
 
     @PostMapping("/users/add")
     public String createUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
-
+        String message;
         try {
             userRepository.insertUser(user);
-            redirectAttributes.addFlashAttribute("message", "User Created Successfully");
-            redirectAttributes.addFlashAttribute("path", "users");
-            return "redirect:/users";
+            message = "User Created Successfully";
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("message", "Internal Server Error");
-            redirectAttributes.addFlashAttribute("path", "users");
-            return "redirect:/users";
+            message = "Internal Server Error";
         }
+        redirectAttributes.addFlashAttribute("message", message);
+        redirectAttributes.addFlashAttribute("path", "users");
+        return "redirect:/users";
     }
 
     @GetMapping("/addusers")
