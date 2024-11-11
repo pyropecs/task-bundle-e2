@@ -17,7 +17,7 @@
                 <%
                     String message = (String) request.getAttribute("message");
                     String messageClass = "";
-                    if ("Users added to the book sucessfully".equals(message)) {
+                    if ("Users updated to the book sucessfully".equals(message)) {
                         messageClass = "success";
                     } else if ("Internal Server Error".equals(message)) {
                         messageClass = "error";
@@ -59,7 +59,7 @@
                             for (User user : users) {
                     %>
                         <div class="checkbox-container">
-                            <input type="checkbox" name="userIds" class="checkbox" id="<%= user.getId() %>" value="<%= user.getId() %>" />
+                            <input type="checkbox" disabled name="userIds" class="checkbox" id="<%= user.getId() %>" value="<%= user.getId() %>" />
                             <label class="user-list" for="<%= user.getId() %>"><%= user.getName() %></label>
                         </div>
                     <%

@@ -41,7 +41,7 @@ public class BookControllerTest extends TestConfig {
 
         @Test
     public void postRequestCreateUserTest() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.post("/books/add").param("name", "praveen").param("author", "testauthor").param("price", "20")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/books")).andExpect(flash().attribute("message","Book Created Successfully" )).andExpect(flash().attribute("path", "books"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/books/add").param("name", "apocylypse").param("author", "testauthor").param("price", "20")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/books")).andExpect(flash().attribute("message","Book Created Successfully" )).andExpect(flash().attribute("path", "books"));
 
 
     }
@@ -58,7 +58,7 @@ public class BookControllerTest extends TestConfig {
 
     @Test
     public void InsertUsersIntoBookTest() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.post("/addusers/insert").param("bookId", "1").param("userIds", "1","2","3")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/addusers")).andExpect(flash().attribute("message","Users added to the book sucessfully" ));
+        mockMvc.perform(MockMvcRequestBuilders.post("/addusers/insert").param("bookId", "1").param("userIds", "1","2","3")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/addusers")).andExpect(flash().attribute("message","Users updated to the book sucessfully" ));
 
 
     }

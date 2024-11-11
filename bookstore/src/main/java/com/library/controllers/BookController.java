@@ -48,7 +48,7 @@ public class BookController {
         try {
             repository.insertUsersToBook(form.getBookId(), form.getUserIds());
             
-           message="Users added to the book sucessfully";
+           message="Users updated to the book sucessfully";
         } catch (Exception e) {
             System.out.println("Exception occured:" + "AddUserBookController.insertUsersToBook()");
             e.printStackTrace();

@@ -108,12 +108,7 @@ function checkEmptySelected() {
   if (bookSelect.value === "") {
     bookSelectError.textContent = "Book is required";
     bookSelectError.classList.add("show");
-    isNotError = !isNotError;
-  }
-  if(matchedLengths === 0 ){
-    bookSelectError.textContent = "No Users is selected";
-    bookSelectError.classList.add("show");
-    isNotError = !isNotError;
+    isNotError = false;
   }
   return isNotError;
 }
@@ -165,14 +160,15 @@ function checkNumber(element, field) {
 
 async function getUsers(e) {
   const selectedValue = e.value;
-
+  const bookSelectError = document.querySelector("#select-error");
+  bookSelectError.classList.remove("show");
   const response = await fetch(`users/all/${selectedValue}`);
   const results = await response.json();
   const checkBoxes = document.querySelectorAll(".checkbox");
 
   checkBoxes.forEach((checkBox) => {
     const checkBoxValue = Number(checkBox.value);
-
+    checkBox.disabled = false;
     const matchedResult = results.find((result) => result.id === checkBoxValue);
 
     if (matchedResult) {

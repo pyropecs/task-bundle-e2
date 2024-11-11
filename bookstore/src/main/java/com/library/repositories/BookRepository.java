@@ -38,16 +38,19 @@ public class BookRepository {
     public String insertUsersToBook(int bookId, List<Integer> userIds) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
-
+      
         try {
             transaction = session.beginTransaction();
             Book book = session.get(Book.class, bookId);
             book.getUsers().clear();
-            for (Integer userId : userIds) {
-                User user = session.get(User.class, userId);
-                book.getUsers().add(user);
-                user.getBooks().add(book); 
+            if(userIds !=null){
+                for (Integer userId : userIds) {
+                    User user = session.get(User.class, userId);
+                    book.getUsers().add(user);
+                    user.getBooks().add(book); 
+                }
             }
+          
             session.saveOrUpdate(book);
             transaction.commit();
             return "users inserted into book successufully";
