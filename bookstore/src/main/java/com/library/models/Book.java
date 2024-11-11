@@ -1,5 +1,6 @@
 package com.library.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -11,7 +12,7 @@ public class Book {
     private String author;
     private float price;
     @JsonManagedReference
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
     public int getId() {
         return id;

@@ -17,13 +17,15 @@ public class UserRepository {
     @Autowired
     private SessionFactory sessionFactory ;
 
-    public void insertUser(User user) {
+    public String insertUser(User user) {
         Session session = sessionFactory.openSession();
         try {
             session.save(user);
+            return "user created successfully";
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " UserRepository.insertUser()");
             e.printStackTrace();
+            return "something went wrong.users couldnt be created successfully";
         } finally {
             session.close();
         }

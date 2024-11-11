@@ -1,0 +1,8 @@
+com\library\models\Book.class
+com\library\repositories\UserRepository.class
+com\library\repositories\BookRepository.class
+com\library\controllers\UserController.class
+com\library\models\User.class
+com\library\controllers\BookController.class
+com\library\dto\AdduserToBookForm.class
+com\library\controllers\ViewController.class

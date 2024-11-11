@@ -37,14 +37,11 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
 
         try {
-            List<User> users = userRepository.getAllUsers(1);
-
+            List<User> users = userRepository.getAllUsers();
             return new ResponseEntity<>(users, HttpStatus.OK);
         } catch (Exception e) {
-
             System.out.println("Exception occurred: " + e.getMessage() + " UserController.getAllUsers()");
             e.printStackTrace();
-
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

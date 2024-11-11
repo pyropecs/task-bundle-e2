@@ -1,54 +1,30 @@
 package com.librarytest;
 
-import org.junit.Test;
-
-import org.hibernate.Session;
-
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
-import org.junit.Before;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
-
-import org.mockito.ArgumentMatchers;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.library.controllers.UserController;
-import com.library.models.User;
-
-// import javax.persistence.Query;
-
-
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Test;
+import static org.mockito.ArgumentMatchers.any;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.library.models.Book;
+import com.library.controllers.UserController;
+import com.library.models.User;
 import com.library.repositories.UserRepository;
 
 public class UserControllerTest extends TestConfig {
@@ -130,7 +106,7 @@ public class UserControllerTest extends TestConfig {
 
     @Test
     public void postRequestCreateUserTest() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/add").param("name", "praveen").param("department", "testdepartment").param("desgination", "engine driver")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/users")).andExpect(flash().attribute("message","User Created Successfully" )).andExpect(flash().attribute("path", "users"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/users/add").param("name", "praveen").param("department", "testdepartment").param("designation", "engine driver")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/users")).andExpect(flash().attribute("message","User Created Successfully" )).andExpect(flash().attribute("path", "users"));
 
 
     }

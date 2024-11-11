@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import com.library.models.Book;
 import com.library.models.User;
@@ -19,14 +18,16 @@ public class BookRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void insertBook(Book book) {
+    public String insertBook(Book book) {
         Session session = sessionFactory.openSession();
+        
         try {
             session.save(book);
+            return "book created successfully";    
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " BookRepository.insertBook()");
             e.printStackTrace();
-
+            return "something went wrong book couldn't be created .please try again later";
         } finally {
             session.close();
         }
@@ -34,7 +35,7 @@ public class BookRepository {
     }
     
 
-    public void insertUsersToBook(int bookId, List<Integer> userIds) {
+    public String insertUsersToBook(int bookId, List<Integer> userIds) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
 
@@ -49,11 +50,12 @@ public class BookRepository {
             }
             session.saveOrUpdate(book);
             transaction.commit();
-
+            return "users inserted into book successufully";
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             System.out.println("Exception occurred " + e.getMessage() + " BookRepository.insertUsersToBook()");
             e.printStackTrace();
+            return "something went wrong users couldn't be inserted.please try again later";
         } finally {
             session.close();
         
