@@ -16,18 +16,11 @@
                 
                 <%
                     String message = (String) request.getAttribute("message");
-                    String messageClass = "";
-                    if ("Users updated to the book sucessfully".equals(message)) {
-                        messageClass = "success";
-                    } else if ("Internal Server Error".equals(message)) {
-                        messageClass = "error";
-                    } else {
-                        messageClass = "success hide";
-                        message = ""; 
-                    }
+           
                 %>
-                <p class="<%= messageClass %> text-center" id="message"><%= message %></p>
-
+                <%if(message != null && message !="Internal Server Error"){ %>
+                <p class="success text-center" id="message"><%= message %></p>
+                <% } %>
                 <div class="mwb-form-group select-form no-margin">
                     <select name="bookId" id="bookselect" onchange="getUsers(this)">
                         <option value="" selected hidden disabled>Select Book</option>

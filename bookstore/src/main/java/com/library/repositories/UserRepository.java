@@ -15,17 +15,17 @@ import com.library.models.User;
 public class UserRepository {
 
     @Autowired
-    private SessionFactory sessionFactory ;
+    private SessionFactory sessionFactory;
 
-    public String insertUser(User user) {
+    public boolean insertUser(User user) {
         Session session = sessionFactory.openSession();
         try {
             session.save(user);
-            return "user created successfully";
+            return true;
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " UserRepository.insertUser()");
             e.printStackTrace();
-            return "something went wrong.users couldnt be created successfully";
+            return false;
         } finally {
             session.close();
         }
@@ -36,10 +36,10 @@ public class UserRepository {
         Session session = sessionFactory.openSession();
         List<User> users = null;
         try {
-            String hql = bookidIntegers.length == 0 ? "from User":"Select u from Book b join b.users u where b.id = " + bookidIntegers[0];
+            String hql = bookidIntegers.length == 0 ? "from User" : "Select u from Book b join b.users u where b.id = " + bookidIntegers[0];
             Query query = session.createQuery(hql);
             users = query.getResultList();
-  
+
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " UserRepository.getAllUsers()");
             e.printStackTrace();
@@ -49,10 +49,10 @@ public class UserRepository {
         return users;
     }
 
+    public User getUserById(int userId) {
+        Session session = sessionFactory.openSession();
+        User user = session.get(User.class, userId);
 
-    public User getUserById(int userId){
-    Session session = sessionFactory.openSession();
-    User user = session.get(User.class,userId);
-    return user;
+        return user;
     }
 }

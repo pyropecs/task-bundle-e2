@@ -15,8 +15,6 @@ import com.library.repositories.UserRepository;
 @Service
 public class AddUserService {
 
-   
-
     @Autowired
     private BookRepository bookRepository;
 
@@ -25,22 +23,17 @@ public class AddUserService {
 
     public String AddUsersToBook(AdduserToBookForm form) {
         String message;
-        try {
-            Integer bookId = form.getBookId();
-            List<Integer> userIds = form.getUserIds();
-            Book book = bookRepository.getBookById(bookId);
-            book.getUsers().clear();
+        Integer bookId = form.getBookId();
+        List<Integer> userIds = form.getUserIds();
+        Book book = bookRepository.getBookById(bookId);
+        book.getUsers().clear();
+        if (userIds != null) {
             for (Integer userId : userIds) {
                 User user = userRepository.getUserById(userId);
                 book.getUsers().add(user);
             }
-            message = bookRepository.updateBook(book);
-        } catch (Exception e) {
-            System.out.println("Exception occured:" + "AddUserBookController.insertUsersToBook()");
-            e.printStackTrace();
-            message = "Internal Server Error";
-
         }
+        message = bookRepository.updateBook(book) ? "users inserted into book successufully" : "something went wrong.please try again later";
         return message;
     }
 }

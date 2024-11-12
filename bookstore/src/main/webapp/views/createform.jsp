@@ -23,7 +23,7 @@
 
 				String message = (String) request.getAttribute("message");
 				
-				String messageClass = "";
+				
 			%>
 			 
 			<p class="success text-center" id="message"><%= message %></p>

@@ -26,9 +26,8 @@ public class BookController {
 
     @PostMapping("/books/add")
     public String postBook(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
-    String message;
+        String message;
         message = bookService.insertBook(book);
-        System.out.println(message);
         redirectAttributes.addFlashAttribute("message", message);
         redirectAttributes.addFlashAttribute("path", "books");
         return "redirect:/books";

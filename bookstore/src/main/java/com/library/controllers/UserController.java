@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.library.models.User;
-import com.library.repositories.BookRepository;
 import com.library.services.UserService;
 
 @Controller
@@ -17,8 +16,6 @@ public class UserController {
 
    @Autowired
    private UserService userService;
-    @Autowired
-    private BookRepository bookRepository;
 
     @GetMapping("/users")
     public String createUserPage(Model model) {

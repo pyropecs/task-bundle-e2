@@ -20,15 +20,12 @@ public class UserService {
     
     public String addUser(User user){
         String message;
-        try {
-            userRepository.insertUser(user);
-            message = "User Created Successfully";
-        } catch (Exception e) {
-            System.out.println("something went wrong UserController.createUser()");
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            message = "Internal Server Error";
+        if(user != null){
+            message = userRepository.insertUser(user)  ? "user created successfully":"something went wrong.please try again later";
+        }else {
+            message = "User not found";
         }
+        
         return message;
     }
 }
