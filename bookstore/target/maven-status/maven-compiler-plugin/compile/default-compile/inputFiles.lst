@@ -1,8 +1,12 @@
 C:\e2\task-full-2\bookstore\src\main\java\com\library\controllers\UserController.java
 C:\e2\task-full-2\bookstore\src\main\java\com\library\repositories\BookRepository.java
+C:\e2\task-full-2\bookstore\src\main\java\com\library\services\UserService.java
+C:\e2\task-full-2\bookstore\src\main\java\com\library\services\AddUserService.java
+C:\e2\task-full-2\bookstore\src\main\java\com\library\services\BookService.java
 C:\e2\task-full-2\bookstore\src\main\java\com\library\models\Book.java
 C:\e2\task-full-2\bookstore\src\main\java\com\library\dto\AdduserToBookForm.java
 C:\e2\task-full-2\bookstore\src\main\java\com\library\repositories\UserRepository.java
 C:\e2\task-full-2\bookstore\src\main\java\com\library\controllers\ViewController.java
 C:\e2\task-full-2\bookstore\src\main\java\com\library\models\User.java
+C:\e2\task-full-2\bookstore\src\main\java\com\library\controllers\AddUserController.java
 C:\e2\task-full-2\bookstore\src\main\java\com\library\controllers\BookController.java

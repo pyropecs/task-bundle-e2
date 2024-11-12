@@ -81,7 +81,6 @@
             </form>
         </div>
     </div>
-
       <script src="<c:url value='/js/index.js' />"></script>
 </body>
 </html>

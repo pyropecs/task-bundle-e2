@@ -24,32 +24,15 @@
 				String message = (String) request.getAttribute("message");
 				
 				String messageClass = "";
-				
-				if (message != null && (message.equals("User Created Successfully") || message.equals("Book Created Successfully"))) {
-					messageClass = "success";
-				} else if (message != null && message.equals("Internal Server Error")) {
-					messageClass = "error";
-				} else {
-					messageClass = "success hide";
-					message = ""; 
-				}
 			%>
-			<p class="<%= messageClass %> text-center" id="message"><%= message %></p>
+			 
+			<p class="success text-center" id="message"><%= message %></p>
+			<% for(String field : fields){ %>
 			<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your <%=fields[0]%>*" value="" name="<%=fields[0]%>" id="<%=fields[0]%>">
-				
-					<div class="mwb-form-error" id="<%=fields[0]%>-error"></div>
+					<input type="text" class="mwb-form-control" placeholder="Enter your <%=field%>*" value="" name="<%=field%>" id="<%=field%>">
+					<div class="mwb-form-error" id="<%=field%>-error"></div>
 				</div>
-				<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your <%=fields[1]%>*" name="<%=fields[1]%>" id="<%=fields[1]%>">
-					
-					<div class="mwb-form-error" id="<%=fields[1]%>-error"></div>
-				</div>
-				<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your <%=fields[2]%>*" name="<%=fields[2]%>" id="<%=fields[2]%>">
-					<div class="mwb-form-error" id="<%=fields[2]%>-error"></div>
-				</div>
-				
+			<% } %>	
 				<div class="mwb-form-group flex">
 				<a href="/bookstore" style="width: 100%;"> <button type="button" class="mwb-form-submit-btn submit-back-btn" >Back</button></a>	
 					<button type="submit"  class="mwb-form-submit-btn" >Submit</button>

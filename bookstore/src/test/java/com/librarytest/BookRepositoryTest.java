@@ -23,9 +23,13 @@ import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.library.dto.AdduserToBookForm;
 import com.library.models.Book;
 import com.library.models.User;
+
 import com.library.repositories.BookRepository;
+import com.library.services.AddUserService;
+import com.library.services.BookService;
 
 
 
@@ -34,6 +38,9 @@ public class BookRepositoryTest {
 
     @InjectMocks
     private BookRepository bookRepository;  // BookRepository will be injected with mocked sessionFactory
+
+    @InjectMocks
+    private AddUserService addUserService;
 
     @Mock
     private SessionFactory sessionFactory;  // Mock SessionFactory
@@ -114,7 +121,10 @@ public class BookRepositoryTest {
         when(session.get(User.class, 0)).thenReturn(user1);
         when(session.get(User.class, 1)).thenReturn(user2);
         when(session.beginTransaction()).thenReturn(transaction);
-        String message = bookRepository.insertUsersToBook(book.getId(), Arrays.asList(user1.getId(), user2.getId()));
+        AdduserToBookForm addUserForm = new AdduserToBookForm();
+        addUserForm.setBookId(book.getId());
+        addUserForm.setUserIds( Arrays.asList(user1.getId(), user2.getId()));
+        String message = addUserService.AddUsersToBook(addUserForm); 
         Assert.assertEquals("users inserted into book successufully", message);
         verify(session).saveOrUpdate(book);
     }
@@ -137,8 +147,10 @@ public class BookRepositoryTest {
         when(session.get(User.class, 0)).thenReturn(user1);
         when(session.beginTransaction()).thenReturn(transaction);
         when(session.get(User.class, 1)).thenThrow(new NullPointerException());
-        
-        String message = bookRepository.insertUsersToBook(book.getId(), Arrays.asList(user1.getId(), user2.getId()));
+        AdduserToBookForm addUserForm = new AdduserToBookForm();
+        addUserForm.setBookId(book.getId());
+        addUserForm.setUserIds( Arrays.asList(user1.getId(), user2.getId()));
+        String message = addUserService.AddUsersToBook(addUserForm); 
         Assert.assertNotNull(transaction);
          verify(sessionFactory).openSession();
         verify(session).beginTransaction();
@@ -163,10 +175,8 @@ public class BookRepositoryTest {
          books =  bookRepository.getAllBooks();
          Assert.assertArrayEquals(books.toArray(new Book[0]), books.toArray(new Book[0]));
     }
-
-
+    
     @Test
-   
     public void getAllBooksExceptionTest(){
         List<Book> books = new LinkedList<>();
         books.add(book);

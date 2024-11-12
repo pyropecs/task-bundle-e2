@@ -97,7 +97,7 @@ public class UserRepositoryTest {
     @Test
     public void testGetAllUsersWithBookIds() {
 
-        Integer[] bookidIntegers = {1};
+        int[] bookidIntegers = {1};
         String expectedHql = "Select u from User u join u.books b where b.id = 1";
         when(sessionFactory.openSession()).thenReturn(session);
         when(session.createQuery(expectedHql)).thenReturn(query);

@@ -8,14 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.library.models.Book;
+import com.library.services.BookService;
 
-import com.library.repositories.BookRepository;
 
 @Controller
 public class ViewController {
 
     @Autowired
-    private BookRepository repository;
+    private BookService bookService;
+   
 
     @GetMapping("/")
     public String renderHomePage() {
@@ -23,9 +24,8 @@ public class ViewController {
     }
 
     @GetMapping("/view")
-    public String viewBooks(Model model) {
-        List<Book> books = repository.getAllBooks();
-
+    public String viewBooksUsers(Model model) {
+        List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
         return "viewbookuser";
 

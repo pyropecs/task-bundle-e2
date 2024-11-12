@@ -162,7 +162,7 @@ async function getUsers(e) {
   const selectedValue = e.value;
   const bookSelectError = document.querySelector("#select-error");
   bookSelectError.classList.remove("show");
-  const response = await fetch(`users/all/${selectedValue}`);
+  const response = await fetch(`addusers/all/${selectedValue}`);
   const results = await response.json();
   const checkBoxes = document.querySelectorAll(".checkbox");
 

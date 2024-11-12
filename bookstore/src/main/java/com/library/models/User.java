@@ -1,8 +1,4 @@
 package com.library.models;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 public class User {
@@ -10,8 +6,7 @@ public class User {
  private String name;
  private String department;
  private String designation;
- @JsonBackReference
- private Set<Book> books = new HashSet<>();
+
  public int getId() {
      return id;
  }
@@ -26,9 +21,7 @@ public class User {
      return name;
  }
 
- public Set<Book> getBooks() {
-         return books;
- }
+
  public void setId(int id) {
      this.id = id;
  }
@@ -42,7 +35,5 @@ public class User {
      this.name = name;
  }
 
- public void setBooks(Set<Book> books) {
-         this.books = books;
- }
+
 }

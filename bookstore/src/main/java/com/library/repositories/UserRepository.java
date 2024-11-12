@@ -32,11 +32,11 @@ public class UserRepository {
 
     }
 
-    public List<User> getAllUsers(Integer... bookidIntegers) {
+    public List<User> getAllUsers(int... bookidIntegers) {
         Session session = sessionFactory.openSession();
         List<User> users = null;
         try {
-            String hql = bookidIntegers.length == 0 ? "from User":"Select u from User u join u.books b where b.id = " + bookidIntegers[0];
+            String hql = bookidIntegers.length == 0 ? "from User":"Select u from Book b join b.users u where b.id = " + bookidIntegers[0];
             Query query = session.createQuery(hql);
             users = query.getResultList();
   
@@ -47,5 +47,12 @@ public class UserRepository {
             session.close();
         }
         return users;
+    }
+
+
+    public User getUserById(int userId){
+    Session session = sessionFactory.openSession();
+    User user = session.get(User.class,userId);
+    return user;
     }
 }
