@@ -21,7 +21,7 @@ public class UserService {
     public String addUser(User user){
         String message;
         if(user != null){
-            message = userRepository.insertUser(user)  ? "user created successfully":"something went wrong.please try again later";
+            message = userRepository.insertUser(user)  ? "User Created Successfully":"something went wrong.please try again later";
         }else {
             message = "User not found";
         }

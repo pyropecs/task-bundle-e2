@@ -82,7 +82,7 @@ public class BookRepositoryTest {
     @Test
     public void AddBookTest() {
    
-        String message = bookRepository.insertBook(book);
+        boolean message = bookRepository.insertBook(book);
 
        
         Assert.assertEquals("book created successfully", message);
@@ -94,7 +94,7 @@ public class BookRepositoryTest {
     @Test
     public void AddBookExceptionTest() {
         when(session.save(any())).thenThrow(new HibernateException("something went wrong"));
-        String message = bookRepository.insertBook(book);
+        boolean message = bookRepository.insertBook(book);
 
         Assert.assertEquals("something went wrong book couldn't be created .please try again later", message);
 

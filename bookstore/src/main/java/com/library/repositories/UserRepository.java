@@ -52,7 +52,6 @@ public class UserRepository {
     public User getUserById(int userId) {
         Session session = sessionFactory.openSession();
         User user = session.get(User.class, userId);
-
         return user;
     }
 }

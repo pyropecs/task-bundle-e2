@@ -55,7 +55,7 @@ public class UserRepositoryTest {
     @Test
     public void AddBookTest() {
 
-        String message = userRepository.insertUser(user);
+        boolean message = userRepository.insertUser(user);
         Assert.assertEquals("user created successfully", message);
         verify(session).save(user);
         verify(session).close();
@@ -64,7 +64,7 @@ public class UserRepositoryTest {
     @Test
     public void AddBookExceptionTest() {
         when(session.save(any())).thenThrow(new HibernateException("something went wrong"));
-        String message = userRepository.insertUser(user);
+        boolean message = userRepository.insertUser(user);
         Assert.assertEquals("something went wrong.users couldnt be created successfully", message);
         verify(session).save(user);
         verify(session).close();

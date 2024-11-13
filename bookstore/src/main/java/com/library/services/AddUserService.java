@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.library.dto.AdduserToBookForm;
 import com.library.models.Book;
 import com.library.models.User;
-
 import com.library.repositories.BookRepository;
 import com.library.repositories.UserRepository;
 
@@ -33,7 +32,7 @@ public class AddUserService {
                 book.getUsers().add(user);
             }
         }
-        message = bookRepository.updateBook(book) ? "users inserted into book successufully" : "something went wrong.please try again later";
+        message = bookRepository.updateBook(book) ? "Users Updated into Book Successufully" : "something went wrong.please try again later";
         return message;
     }
 }

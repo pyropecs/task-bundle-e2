@@ -27,7 +27,8 @@ public class UserController {
  
 
     @PostMapping("/users/add")
-    public String createUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
+    public String createUser( @ModelAttribute User user, RedirectAttributes redirectAttributes) {
+        
         String message = userService.addUser(user);
         redirectAttributes.addFlashAttribute("message", message);
         redirectAttributes.addFlashAttribute("path", "users");

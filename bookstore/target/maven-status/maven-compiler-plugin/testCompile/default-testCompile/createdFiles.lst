@@ -1,2 +1,6 @@
+com\librarytest\ViewControllerTest.class
+com\librarytest\UserRepositoryTest.class
 com\librarytest\TestConfig.class
 com\librarytest\BookControllerTest.class
+com\librarytest\BookRepositoryTest.class
+com\librarytest\UserControllerTest.class

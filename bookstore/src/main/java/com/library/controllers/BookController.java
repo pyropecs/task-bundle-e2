@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.library.models.Book;
-
 import com.library.services.BookService;
 
 @Controller
@@ -25,7 +24,7 @@ public class BookController {
     }
 
     @PostMapping("/books/add")
-    public String postBook(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
+    public String postBook( @ModelAttribute Book book, RedirectAttributes redirectAttributes) {
         String message;
         message = bookService.insertBook(book);
         redirectAttributes.addFlashAttribute("message", message);

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,7 @@ public class AddUserController {
     private AddUserService addUserService;
 
     @PostMapping("/addusers/insert")
-    public String insertUsersToBook(@ModelAttribute AdduserToBookForm form, RedirectAttributes redirectAttributes) {
+    public String insertUsersToBook(@Validated @ModelAttribute AdduserToBookForm form, RedirectAttributes redirectAttributes) {
         
         String message = addUserService.AddUsersToBook(form);
         redirectAttributes.addFlashAttribute("message", message);

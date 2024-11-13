@@ -21,8 +21,8 @@ public class BookService {
 
     public String insertBook(Book book) {
         String message;
-        if (book != null) {
-            message = bookRepository.insertBook(book) ? "book inserted successfully" : "something went wrong.please try again later";
+        if (book != null ) {
+            message = bookRepository.insertBook(book) ? "Book Created Successfully" : "something went wrong.please try again later";
         } else {
             message = "no Book found";
         }
