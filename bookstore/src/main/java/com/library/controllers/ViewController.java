@@ -28,7 +28,6 @@ public class ViewController {
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
         return "viewbookuser";
-
     }
 
 }

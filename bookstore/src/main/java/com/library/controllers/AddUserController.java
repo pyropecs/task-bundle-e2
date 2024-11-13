@@ -46,14 +46,10 @@ public class AddUserController {
     @ResponseBody
     public ResponseEntity<List<User>> getUsersWithBook(@PathVariable("bookid") int bookid) {
 
-        try {
+
             List<User> users = userService.getAllUsers(bookid);
             return new ResponseEntity<>(users, HttpStatus.OK);
-        } catch (Exception e) {
-            System.out.println("Exception occurred: " + e.getMessage() + " UserController.getUsersWithBooks()");
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+       
     }
 
     @GetMapping("/addusers")
