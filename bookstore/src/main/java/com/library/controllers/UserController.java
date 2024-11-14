@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/users/add")
     public String createUser( @ModelAttribute User user, RedirectAttributes redirectAttributes) {
-        logger.info("Client adding user Object - {} ",user);
+        logger.info("Client adding user Object - {} ",user.toString());
         String message = userService.addUser(user);
         logger.info(message);
         redirectAttributes.addFlashAttribute("message", message);

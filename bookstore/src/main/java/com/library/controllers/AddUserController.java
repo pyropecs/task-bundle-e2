@@ -64,8 +64,8 @@ public class AddUserController {
         logger.info("client requested add user to book page");
         List<Book> books = bookService.getAllBooks();
         List<User> users = userService.getAllUsers();
-        logger.info("books recieved successfully - {}",books);
-        logger.info("users recieved successfully - {}",users);
+        logger.info("books recieved successfully.books size - {}",books.size());
+        logger.info("users recieved successfully.users size - {}",users.size());
         model.addAttribute("books", books);
         model.addAttribute("users", users);
         return "addusertobook";

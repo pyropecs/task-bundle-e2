@@ -30,9 +30,9 @@ public class BookController {
     @PostMapping("/books/add")
     public String postBook( @ModelAttribute Book book, RedirectAttributes redirectAttributes) {
         String message;
-        logger.info("Client adding book Object - {} ",book);
+        logger.info("Client adding book Object - {} ",book.toString());
         message = bookService.insertBook(book);
-        logger.info("user object added successfully user - {}",book);
+        logger.info("user object added successfully user - {}",book.toString());
         redirectAttributes.addFlashAttribute("message", message);
         redirectAttributes.addFlashAttribute("path", "books");
         return "redirect:/books";

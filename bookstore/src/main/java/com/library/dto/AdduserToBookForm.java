@@ -17,4 +17,11 @@ public class AdduserToBookForm {
                 this.userIds = userIds;
         }
 
+    @Override
+    public String toString() {
+        return "Book Id: " + bookId + "User Ids:" + userIds;
+    }
+
+        
+
 }

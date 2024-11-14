@@ -44,4 +44,11 @@ public class User {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "User Id: " + id + " User Name: " + name + " User Department: " + department + " User Designation: "+ designation;
+    }
+
+
+
 }
