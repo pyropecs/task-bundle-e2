@@ -24,7 +24,7 @@ public class UserRepository {
             return true;
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " UserRepository.insertUser()");
-            e.printStackTrace();
+            
             return false;
         } finally {
             session.close();
@@ -42,7 +42,7 @@ public class UserRepository {
 
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " UserRepository.getAllUsers()");
-            e.printStackTrace();
+
         } finally {
             session.close();
         }

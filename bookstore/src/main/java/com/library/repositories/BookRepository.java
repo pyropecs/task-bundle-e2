@@ -26,7 +26,7 @@ public class BookRepository {
             return true; 
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " BookRepository.insertBook()");
-            e.printStackTrace();
+          
             return false; 
         } finally {
             session.close();
@@ -56,7 +56,7 @@ public class BookRepository {
             books = query.getResultList();
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " BookRepository.getAllBooks()");
-            e.printStackTrace();
+            
         } finally {
             session.close();
         }
@@ -76,7 +76,7 @@ public class BookRepository {
                 transaction.rollback();
             }
             System.out.println("Exception occurred " + e.getMessage() + " BookRepository.insertUsersToBook()");
-            e.printStackTrace();
+          
             return false; 
         } finally {
             session.close();

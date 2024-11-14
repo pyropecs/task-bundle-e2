@@ -1,5 +1,7 @@
 package com.library.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +18,11 @@ public class UserController {
 
    @Autowired
    private UserService userService;
+   private static final Logger logger = LogManager.getLogger();
 
     @GetMapping("/users")
     public String createUserPage(Model model) {
+        logger.info("recieved /users request to fetch createform");     
         model.addAttribute("path", "users");
         return "createform";
     }
@@ -28,8 +32,9 @@ public class UserController {
 
     @PostMapping("/users/add")
     public String createUser( @ModelAttribute User user, RedirectAttributes redirectAttributes) {
-        
+        logger.info("Client adding user Object - {} ",user);
         String message = userService.addUser(user);
+        logger.info(message);
         redirectAttributes.addFlashAttribute("message", message);
         redirectAttributes.addFlashAttribute("path", "users");
         return "redirect:/users";

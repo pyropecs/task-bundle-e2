@@ -2,6 +2,8 @@ package com.library.controllers;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +36,13 @@ public class AddUserController {
     @Autowired
     private AddUserService addUserService;
 
+    private static final Logger logger = LogManager.getLogger();
+
     @PostMapping("/addusers/insert")
     public String insertUsersToBook(@Validated @ModelAttribute AdduserToBookForm form, RedirectAttributes redirectAttributes) {
-        
+        logger.info("client updating users to the book");
         String message = addUserService.AddUsersToBook(form);
+        logger.info("client successfully updated users and redirecting to the addusers page ");
         redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/addusers";
     }
@@ -46,8 +51,9 @@ public class AddUserController {
     @ResponseBody
     public ResponseEntity<List<User>> getUsersWithBook(@PathVariable("bookid") int bookid) {
 
-
+            logger.info("Client requested users with bookid");
             List<User> users = userService.getAllUsers(bookid);
+            logger.info("Recieved users with bookId - {}",bookid);
             return new ResponseEntity<>(users, HttpStatus.OK);
        
     }
@@ -55,8 +61,11 @@ public class AddUserController {
     @GetMapping("/addusers")
     public String getAddUserToPage(Model model) {
 
+        logger.info("client requested add user to book page");
         List<Book> books = bookService.getAllBooks();
         List<User> users = userService.getAllUsers();
+        logger.info("books recieved successfully - {}",books);
+        logger.info("users recieved successfully - {}",users);
         model.addAttribute("books", books);
         model.addAttribute("users", users);
         return "addusertobook";
