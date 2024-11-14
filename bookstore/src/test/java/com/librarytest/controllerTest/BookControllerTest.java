@@ -1,4 +1,4 @@
-package com.librarytest;
+package com.librarytest.controllerTest;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,0 +1,15 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class table="books" name="com.library.models.Book">
+		<id name="id" column="bookId">
+			<generator class="identity" />
+		</id>
+		<property name="name" column="name" />
+		<property name="author" column="author" />
+		<property name="price" column="price" />
+		<set name="users" table="books_users" cascade="all" lazy="false">
+			<key column="bookId" />
+			<many-to-many column="userId" class="com.library.models.User" />
+		</set>
+	</class>
+</hibernate-mapping>

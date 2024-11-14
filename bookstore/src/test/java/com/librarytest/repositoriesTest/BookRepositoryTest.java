@@ -1,4 +1,4 @@
-package com.librarytest;
+package com.librarytest.repositoriesTest;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -14,10 +14,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
@@ -82,10 +91,10 @@ public class BookRepositoryTest {
     @Test
     public void AddBookTest() {
    
-        boolean message = bookRepository.insertBook(book);
+        boolean isInserted = bookRepository.insertBook(book);
 
        
-        Assert.assertEquals("book created successfully", message);
+        Assert.assertEquals(true, isInserted);
 
     
         verify(session).save(book);
@@ -94,73 +103,35 @@ public class BookRepositoryTest {
     @Test
     public void AddBookExceptionTest() {
         when(session.save(any())).thenThrow(new HibernateException("something went wrong"));
-        boolean message = bookRepository.insertBook(book);
+        boolean isInserted = bookRepository.insertBook(book);
 
-        Assert.assertEquals("something went wrong book couldn't be created .please try again later", message);
+        Assert.assertEquals(false, isInserted);
 
         verify(session).save(book);
     }
 
-    @Test
-    public void AddUsersToBookTest() {
-      
-
-        User user1 = new User();
-        user1.setId(0);
-        user1.setName("praveen");
-        user1.setDepartment("library center");
-        user1.setDesignation("librarian");
-
-        User user2 = new User();
-        user2.setId(1);
-        user2.setName("amith");
-        user2.setDepartment("plumber");
-        user2.setDesignation("economical");
-
-        when(session.get(Book.class, book.getId())).thenReturn(book);
-        when(session.get(User.class, 0)).thenReturn(user1);
-        when(session.get(User.class, 1)).thenReturn(user2);
-        when(session.beginTransaction()).thenReturn(transaction);
-        AdduserToBookForm addUserForm = new AdduserToBookForm();
-        addUserForm.setBookId(book.getId());
-        addUserForm.setUserIds( Arrays.asList(user1.getId(), user2.getId()));
-        String message = addUserService.AddUsersToBook(addUserForm); 
-        Assert.assertEquals("users inserted into book successufully", message);
-        verify(session).saveOrUpdate(book);
-    }
 
     @Test
-  
-    public void AddUsersToBookExceptionTest(){
-        User user1 = new User();
-        user1.setId(0);
-        user1.setName("praveen");
-        user1.setDepartment("library center");
-        user1.setDesignation("librarian");
+    public void getBookByIdTest(){
+        when(session.get(Book.class, 1)).thenReturn(book);
 
-        User user2 = new User();
-        user2.setId(1);
-        user2.setName("amith");
-        user2.setDepartment("plumber");
-        user2.setDesignation("economical");
-        when(session.get(Book.class, book.getId())).thenReturn(book);
-        when(session.get(User.class, 0)).thenReturn(user1);
-        when(session.beginTransaction()).thenReturn(transaction);
-        when(session.get(User.class, 1)).thenThrow(new NullPointerException());
-        AdduserToBookForm addUserForm = new AdduserToBookForm();
-        addUserForm.setBookId(book.getId());
-        addUserForm.setUserIds( Arrays.asList(user1.getId(), user2.getId()));
-        String message = addUserService.AddUsersToBook(addUserForm); 
-        Assert.assertNotNull(transaction);
-         verify(sessionFactory).openSession();
-        verify(session).beginTransaction();
-        verify(transaction).rollback();
+        Book actualBook = bookRepository.getBookById(1);
+        assertThat(actualBook, is(book));
+
+
         verify(session).close();
-  
-    
 
-        Assert.assertEquals("something went wrong users couldn't be inserted.please try again later",message);
     }
+
+    @Test
+    public void getBookByIdExceptionTest(){
+        when(session.get(Book.class, 1)).thenThrow(new HibernateException("something went wrong"));
+        Book book = bookRepository.getBookById(1);
+        assertNull(book);
+        verify(session).close();
+    }
+
+
 
     @Test
     public void getAllBooksTest(){
@@ -188,5 +159,37 @@ public class BookRepositoryTest {
 
          books =  bookRepository.getAllBooks();
          Assert.assertNull(books);
+    }
+
+
+
+    @Test
+    public void updateBookTest(){
+        when(session.beginTransaction()).thenReturn(transaction);
+        
+        boolean isUpdated = bookRepository.updateBook(book);
+        assertTrue(isUpdated);
+        verify(transaction).commit();
+        verify(session).saveOrUpdate(book);
+        verify(session).close();
+    }
+
+    @Test
+    public void updateBookExceptionTest(){
+        when(session.beginTransaction()).thenReturn(transaction);
+        doThrow(new HibernateException("something went wrong")).when(session).saveOrUpdate(book);
+        boolean isUpdated = bookRepository.updateBook(book);
+        assertFalse(isUpdated);
+        verify(transaction).rollback();
+        verify(session).close();
+    }
+    @Test
+    public void updateBookExceptionTransactionNullTest(){
+        when(session.beginTransaction()).thenReturn(null);
+        doThrow(new HibernateException("something went wrong")).when(session).saveOrUpdate(book);
+        boolean isUpdated = bookRepository.updateBook(book);
+        assertFalse(isUpdated);
+        verify(transaction,never()).rollback();
+        verify(session).close();
     }
 }

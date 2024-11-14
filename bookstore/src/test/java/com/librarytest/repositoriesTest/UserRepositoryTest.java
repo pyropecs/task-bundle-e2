@@ -1,4 +1,4 @@
-package com.librarytest;
+package com.librarytest.repositoriesTest;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -9,12 +9,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.junit.Assert;
+
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -46,32 +51,32 @@ public class UserRepositoryTest {
     public void setup() {
         user = new User();
         user.setId(1);
-        user.setName("praveen");
-        user.setDepartment("electrical");
-        user.setDesignation("electronics");
+        user.setName("ashok amban");
+        user.setDepartment("law");
+        user.setDesignation("lawyer");
         when(sessionFactory.openSession()).thenReturn(session);
     }
 
     @Test
-    public void AddBookTest() {
+    public void AddUserTest() {
 
-        boolean message = userRepository.insertUser(user);
-        Assert.assertEquals("user created successfully", message);
+        boolean isInserted = userRepository.insertUser(user);
+        Assert.assertEquals(true, isInserted);
         verify(session).save(user);
         verify(session).close();
     }
 
     @Test
-    public void AddBookExceptionTest() {
+    public void AddUserExceptionTest() {
         when(session.save(any())).thenThrow(new HibernateException("something went wrong"));
-        boolean message = userRepository.insertUser(user);
-        Assert.assertEquals("something went wrong.users couldnt be created successfully", message);
+        boolean isInserted = userRepository.insertUser(user);
+        Assert.assertEquals(false, isInserted);
         verify(session).save(user);
         verify(session).close();
     }
 
     @Test
-    public void getAllBooksTest() {
+    public void getAllUsersTest() {
         List<User> users = new LinkedList<>();
         users.add(user);
         users.add(user2);
@@ -84,7 +89,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void getAllBooksExceptionTest() {
+    public void getAllUsersExceptionTest() {
         List<User> users = new LinkedList<>();
         users.add(user);
         users.add(user2);
@@ -98,7 +103,7 @@ public class UserRepositoryTest {
     public void testGetAllUsersWithBookIds() {
 
         int[] bookidIntegers = {1};
-        String expectedHql = "Select u from User u join u.books b where b.id = 1";
+        String expectedHql = "Select u from Book b join b.users u where b.id = 1";
         when(sessionFactory.openSession()).thenReturn(session);
         when(session.createQuery(expectedHql)).thenReturn(query);
         when(query.getResultList()).thenReturn(Arrays.asList(new User(), new User())); // Replace with actual User objects as needed
@@ -107,5 +112,12 @@ public class UserRepositoryTest {
         verify(session).close();
         assertNotNull(result);
         assertEquals(2, result.size());
+    }
+
+    @Test
+    public void getUserByIdTest(){
+        when(session.get(User.class,1)).thenReturn(user);
+        User actualUser = userRepository.getUserById(1);
+        assertThat(user, is(actualUser));
     }
 }

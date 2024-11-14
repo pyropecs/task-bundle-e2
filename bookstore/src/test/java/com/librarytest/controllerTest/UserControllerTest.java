@@ -1,4 +1,4 @@
-package com.librarytest;
+package com.librarytest.controllerTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,39 +60,6 @@ public class UserControllerTest  {
 
  
 
-    // @Test
-    // public void getAllUsersWithBookIdTest() throws Exception {
-    //     List<User> users = new LinkedList<>();
-    //     User user1 = new User();
-    //     user1.setId(1);
-    //     user1.setName("praveen");
-    //     user1.setDepartment("electrical");
-    //     user1.setDesignation("engineer");
-    //     users.add(user1);
-    //     MockitoAnnotations.initMocks(this);
-    //     mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
-    //     when(userRepository.getAllUsers(1)).thenReturn(users);
-    //     mockMvc.perform(get("/users/all/1").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andDo(print());
-
-    // }
-   
-    // @Test
-    // public void getAllUsersWithBookIdExcpetionTest() throws Exception {
-    //     MockitoAnnotations.initMocks(this);
-    //     mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
-    //     when(userRepository.getAllUsers(1)).thenThrow(new RuntimeException());
-    //     mockMvc.perform(MockMvcRequestBuilders.get("/users/all/1"))
-    //             .andExpect(MockMvcResultMatchers.status().isInternalServerError());
-    // }
-    
-
-    // @Test
-    // public void getAddUserToPageFormTest() throws Exception{
-    //     mockMvc.perform(MockMvcRequestBuilders.get("/addusers")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("addusertobook")).andExpect(MockMvcResultMatchers.forwardedUrl("/views/addusertobook.jsp"));
-
-
-    // }
-
 
     @Test
     public void postRequestCreateUserTest() throws Exception{
@@ -100,14 +67,6 @@ public class UserControllerTest  {
         mockMvc.perform(MockMvcRequestBuilders.post("/users/add").param("name", "praveen").param("department", "testdepartment").param("designation", "engine driver")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/users")).andExpect(flash().attribute("message","User Created Successfully" )).andExpect(flash().attribute("path", "users"));
     }
 
-    // @Test
-    // public void postCreateUserExceptionTest() throws Exception{
-    //     MockitoAnnotations.initMocks(this);
-    //     mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
-        
-    //     doThrow(new RuntimeException()).when(userRepository).insertUser(any(User.class));
-    //  mockMvc.perform(MockMvcRequestBuilders.post("/users/add"))
-    //  .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/users")).andExpect(flash().attribute("message","Internal Server Error" )).andExpect(flash().attribute("path", "users"));
-    // }
+
 
 }

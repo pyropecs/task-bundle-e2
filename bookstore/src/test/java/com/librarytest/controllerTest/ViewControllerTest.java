@@ -1,8 +1,10 @@
-package com.librarytest;
+package com.librarytest.controllerTest;
 
 import org.junit.Test;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.librarytest.TestConfig;
 
 public class ViewControllerTest extends TestConfig {
     @Test
