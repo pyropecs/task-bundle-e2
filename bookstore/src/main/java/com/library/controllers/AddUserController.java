@@ -60,7 +60,6 @@ public class AddUserController {
 
     @GetMapping("/addusers")
     public String getAddUserToPage(Model model) {
-
         logger.info("client requested add user to book page");
         List<Book> books = bookService.getAllBooks();
         List<User> users = userService.getAllUsers();

@@ -20,8 +20,18 @@ async function getUsers(e) {
     });
   }
   
+  document.addEventListener("DOMContentLoaded", () => {
+    const messageElement = document.querySelector("#message");
+
+    if (messageElement) {
+      setTimeout(() => messageElement.textContent = "", 2500);
+    }
+  });
+  
+
 
   function checkEmptySelected() {
+    
     const bookSelect = document.querySelector("#bookselect");
     const bookSelectError = document.querySelector("#select-error");
   

@@ -7,6 +7,7 @@ const fields =
 
 document.addEventListener("DOMContentLoaded", () => {
   const messageElement = document.querySelector("#message");
+  console.log(messageElement);
   if (messageElement) {
     setTimeout(() => messageElement.textContent = "", 2500);
   }

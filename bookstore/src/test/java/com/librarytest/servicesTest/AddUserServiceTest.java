@@ -1,18 +1,16 @@
 package com.librarytest.servicesTest;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
+import org.junit.Before;
+import org.junit.Test;
 import static org.mockito.ArgumentMatchers.anyInt;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.library.dto.AdduserToBookForm;
@@ -58,6 +56,7 @@ public class AddUserServiceTest {
         when(bookRepository.updateBook(book)).thenReturn(true);
       
         String message = addUserService.AddUsersToBook(form);
+        assertEquals("Book Id: 1User Ids:[1, 2]",form.toString());
         assertEquals("Users Updated into Book Successufully", message);
         
         verify(userRepository,times(2)).getUserById(anyInt());
