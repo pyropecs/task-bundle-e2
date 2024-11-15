@@ -1,24 +1,20 @@
 package com.librarytest.servicesTest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
-
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 
-import com.library.models.Book;
 import com.library.models.User;
-import com.library.repositories.BookRepository;
 import com.library.repositories.UserRepository;
-import com.library.services.BookService;
 import com.library.services.UserService;
 
 public class UserServiceTest {

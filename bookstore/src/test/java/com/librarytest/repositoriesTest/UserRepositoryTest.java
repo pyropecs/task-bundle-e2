@@ -4,22 +4,20 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.is;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.junit.Assert;
-
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -119,5 +117,12 @@ public class UserRepositoryTest {
         when(session.get(User.class,1)).thenReturn(user);
         User actualUser = userRepository.getUserById(1);
         assertThat(user, is(actualUser));
+    }
+
+    @Test
+    public void getUserByIdExceptionTest(){
+        when(session.get(User.class,1)).thenThrow(new HibernateException("something went wrong "));
+         user = userRepository.getUserById(1);
+        assertNull(user);
     }
 }

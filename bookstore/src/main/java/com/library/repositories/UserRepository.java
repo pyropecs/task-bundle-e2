@@ -23,7 +23,7 @@ public class UserRepository {
     public boolean insertUser(User user) {
         
         Session session = sessionFactory.openSession();
-        logger.info("session opened");
+        logger.debug("session opened");
         try {
             logger.info("saving user into the database ,User Id - {}",user.getId());
             session.save(user);
@@ -33,7 +33,7 @@ public class UserRepository {
             return false;
         } finally {
             session.close();
-            logger.info("session closed successfully");
+            logger.debug("session closed successfully");
         }
 
     }
@@ -61,9 +61,17 @@ public class UserRepository {
 
     public User getUserById(int userId) {
         Session session = sessionFactory.openSession();
-        logger.info("session opened");
-        User user = session.get(User.class, userId);
-        logger.info("successfully recieved from database user with id - {}",user.getId());
+        logger.debug("session opened");
+        User user = null;
+        try{
+            user = session.get(User.class, userId);
+            logger.info("successfully recieved from database user with id - {}",user.getId());
+        }catch(Exception e){
+            logger.error("couldnt recieve user Book id - {}.exception occurred: {}",userId,e.getMessage());
+        }finally{
+            session.close();
+            logger.debug("session closed successfully");
+        }
         return user;
     }
 }

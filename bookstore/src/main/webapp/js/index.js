@@ -9,31 +9,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageElement = document.querySelector("#message");
   console.log(messageElement);
   if (messageElement) {
-    setTimeout(() => messageElement.textContent = "", 2500);
+    setTimeout(() => messageElement.remove(), 2500);
   }
 });
-
 
 const fieldErrorElements = fields.map((field) =>
   document.querySelector(`#${field}-error`)
 );
-const fieldElements = fields.map((field) => document.querySelector(`#${field}`));
+const fieldElements = fields.map((field) =>
+  document.querySelector(`#${field}`)
+);
 
 fieldErrorElements.forEach((errorElement, index) => {
   const fieldElement = fieldElements[index];
   fieldElement.addEventListener("input", () => {
     clearError(errorElement);
     if (fieldElement.id === "price") {
-    validateNumber(fieldElement, "price");
+      validateNumber(fieldElement, "price");
     }
   });
 });
 
-function checkAllFields() {
+function validateAllFields() {
   let isNotError = true;
   fieldElements.forEach((fieldElement, index) => {
-    
-
     if (fieldElement.id === "price") {
       const isNumberValid = validateNumber(fieldElement, "price");
       isNotError = isNotError && isNumberValid;
@@ -59,7 +58,7 @@ function validateLength(element, field) {
 }
 
 function validateNumber(element, field) {
-  const value = Number(element.value);
+  const value = Number(element.value); 
   const errorElement = document.querySelector(`#${field}-error`);
   clearError(errorElement);
 

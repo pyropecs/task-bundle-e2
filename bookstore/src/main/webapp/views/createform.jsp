@@ -16,7 +16,7 @@
 		<%String path =  (String) request.getAttribute("path"); %>		
 			<h1>Create <%=path.substring(0, 1).toUpperCase() + path.substring(1,path.length() - 1)%></h1>
 	
-			<form action="<%=path%>/add" data-path="<%=path%>" id="createform" method="post" onSubmit="return checkAllFields()"  >
+			<form action="<%=path%>/add" data-path="<%=path%>" id="createform" method="post" onSubmit="return validateAllFields()"  >
 			<%
 				String[] fields = path.equals("books") 
                    ? new String[]{"name", "author", "price"} 

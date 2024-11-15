@@ -24,7 +24,7 @@ public class BookRepository {
 
     public boolean insertBook(Book book) {
         Session session = sessionFactory.openSession();
-        logger.info("session opened");
+        logger.debug("session opened");
         
         try {
             logger.info("saving book into the database ,Book Id - {}",book.getId());
@@ -37,14 +37,14 @@ public class BookRepository {
         } finally {
            
             session.close();
-            logger.info("session closed succcessfully");
+            logger.debug("session closed succcessfully");
         }
 
     }
 
     public Book getBookById(int bookId) {
         Session session = sessionFactory.openSession();
-        logger.info("session opened");
+        logger.debug("session opened");
         Book book = null;
         try {
             book = session.get(Book.class, bookId); 
@@ -53,7 +53,7 @@ public class BookRepository {
             logger.error("couldnt recieve book.exception occurred: {}",e.getMessage());
 
         }finally{
-            logger.info("session closed");
+            logger.debug("session closed");
             session.close();
         }
        
@@ -62,7 +62,7 @@ public class BookRepository {
 
     public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();
-        logger.info("session opened");
+        logger.debug("session opened");
         List<Book> books = null;
         try {
             Query query = session.createQuery("Select b from Book b");
@@ -73,14 +73,14 @@ public class BookRepository {
             logger.error("couldnt recieve books.exception occurred:"+e.getMessage());
         } finally {
             session.close();
-            logger.info("session closed");
+            logger.debug("session closed");
         }
         return books;
     }
 
     public boolean updateBook(Book book) {
         Session session = sessionFactory.openSession();
-        logger.info("session opened");
+        logger.debug("session opened");
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -98,7 +98,7 @@ public class BookRepository {
           
             return false; 
         } finally {
-            logger.info("session closed");
+            logger.debug("session closed");
             session.close();
 
         }
