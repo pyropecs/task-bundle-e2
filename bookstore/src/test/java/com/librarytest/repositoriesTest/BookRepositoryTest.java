@@ -158,7 +158,7 @@ public class BookRepositoryTest {
 
 
          books =  bookRepository.getAllBooks();
-         Assert.assertNull(books);
+         Assert.assertTrue(books.isEmpty());
     }
 
 

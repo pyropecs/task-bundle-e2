@@ -16,8 +16,9 @@ public class UserService {
     private UserRepository userRepository;
     private static final Logger logger = LogManager.getLogger();
 
-    public List<User> getAllUsers(int... bookidIntegers){
+    public List<User> getAllUsers(int... bookidIntegers){ 
         logger.info("getting the users with bookid - {}",bookidIntegers);
+        
         return userRepository.getAllUsers(bookidIntegers);
     }
     
@@ -28,7 +29,7 @@ public class UserService {
             logger.info("adding user to the database result - {}",message);
         }else {
             message = "User not found";
-            logger.warn("{}",message);
+            logger.error("{}",message);
         }
         return message;
     }

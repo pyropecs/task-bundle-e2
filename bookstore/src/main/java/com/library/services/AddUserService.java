@@ -23,7 +23,7 @@ public class AddUserService {
     private UserRepository userRepository;
     private static final Logger logger = LogManager.getLogger();
     public String AddUsersToBook(AdduserToBookForm form) {
-        String message;
+        
         Integer bookId = form.getBookId();
         List<Integer> userIds = form.getUserIds();
         logger.info("Adding users to book. Book ID: {}, User IDs: {}", bookId, userIds);
@@ -37,7 +37,7 @@ public class AddUserService {
             }
             
         }
-        message = bookRepository.updateBook(book) ? "Users Updated into Book Successufully" : "something went wrong.please try again later";
+        String message = bookRepository.updateBook(book) ? "Users Updated into Book Successufully" : "something went wrong.please try again later";
         logger.info("result - {}",message);
         
         return message;

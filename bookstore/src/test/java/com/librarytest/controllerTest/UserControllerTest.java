@@ -64,7 +64,7 @@ public class UserControllerTest  {
     @Test
     public void postRequestCreateUserTest() throws Exception{
         when(userService.addUser(user)).thenReturn("User Created Successfully");
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/add").param("name", "praveen").param("department", "testdepartment").param("designation", "engine driver")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/users")).andExpect(flash().attribute("message","User Created Successfully" )).andExpect(flash().attribute("path", "users"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/users").param("name", "praveen").param("department", "testdepartment").param("designation", "engine driver")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/users")).andExpect(flash().attribute("message","User Created Successfully" ));
     }
 
 

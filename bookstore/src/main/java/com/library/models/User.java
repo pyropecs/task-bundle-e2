@@ -1,15 +1,13 @@
 package com.library.models;
 
-
-
 public class User {
 
     private int id;
-    
+
     private String name;
-    
+
     private String department;
-    
+
     private String designation;
 
     public int getId() {
@@ -46,9 +44,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User Id: " + id + " User Name: " + name + " User Department: " + department + " User Designation: "+ designation;
+        return "User Id: " + id + " User Name: " + name + " User Department: " + department + " User Designation: " + designation;
     }
-
-
 
 }

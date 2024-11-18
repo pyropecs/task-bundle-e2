@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration >
     <Appenders>
         
         <Console name="Console" target="SYSTEM_OUT">
@@ -8,9 +8,7 @@
         <File name="MAIN" fileName="C:/e2/task-full-2/bookstore/src/logs/application.log" append="false">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
         </File>
-        <File name="DEPLOY" fileName="C:/e2/task-full-2/bookstore/src/logs/deploy.log" append="true">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
-        </File>
+      
     </Appenders>
 
     <Loggers>

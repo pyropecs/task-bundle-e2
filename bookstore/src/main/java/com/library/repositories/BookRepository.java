@@ -1,5 +1,6 @@
 package com.library.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -10,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 
 import com.library.models.Book;
@@ -25,17 +27,17 @@ public class BookRepository {
     public boolean insertBook(Book book) {
         Session session = sessionFactory.openSession();
         logger.debug("session opened");
-        
+
         try {
-            logger.info("saving book into the database ,Book Id - {}",book.getId());
+            logger.info("saving book into the database ,Book Id - {}", book.getId());
             session.save(book);
-            return true; 
+            return true;
         } catch (Exception e) {
-            logger.error("saving book into database failed.exception occurred:",e.getMessage());
-          
-            return false; 
+            logger.error("saving book into database failed.exception occurred:", e.getMessage());
+
+            return false;
         } finally {
-           
+
             session.close();
             logger.debug("session closed succcessfully");
         }
@@ -47,30 +49,30 @@ public class BookRepository {
         logger.debug("session opened");
         Book book = null;
         try {
-            book = session.get(Book.class, bookId); 
-            logger.info("recieved book from database user id - {}",bookId);
+            book = session.get(Book.class, bookId);
+            logger.info("recieved book from database user id - {}", bookId);
         } catch (Exception e) {
-            logger.error("couldnt recieve book.exception occurred: {}",e.getMessage());
+            logger.error("couldnt recieve book.exception occurred: {}", e.getMessage());
 
-        }finally{
+        } finally {
             logger.debug("session closed");
             session.close();
         }
-       
+      
+
         return book;
     }
 
     public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();
         logger.debug("session opened");
-        List<Book> books = null;
+        List<Book> books = new ArrayList<>();
         try {
             Query query = session.createQuery("Select b from Book b");
             books = query.getResultList();
-            logger.info("recieved books successfully Book size: {}",books.size());
+            logger.info("recieved books successfully Book size: {}", books.size());
         } catch (Exception e) {
-
-            logger.error("couldnt recieve books.exception occurred:"+e.getMessage());
+            logger.error("couldnt recieve books.exception occurred:" + e.getMessage());
         } finally {
             session.close();
             logger.debug("session closed");
@@ -81,25 +83,25 @@ public class BookRepository {
     public boolean updateBook(Book book) {
         Session session = sessionFactory.openSession();
         logger.debug("session opened");
-        Transaction transaction = null;
+        Transaction transaction = session.beginTransaction();
         try {
-            transaction = session.beginTransaction();
-            logger.info("transaction started ");
+            logger.debug("transaction started ");
             session.saveOrUpdate(book);
             transaction.commit();
-            logger.info("transaction committed and book updated successfully");
-            return true; 
+            logger.debug("transaction committed");
+            logger.info("book updated successfully");
+            return true;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
-                logger.warn("book didnt get updated.transaction got rollbacked");
+                logger.error("book didnt get updated.transaction got rollbacked");
             }
-            logger.error("book updation failed.exception occurred: "+e.getMessage());
-          
-            return false; 
+            logger.error("book updation failed.exception occurred: " + e.getMessage());
+
+            return false;
         } finally {
-            logger.debug("session closed");
             session.close();
+            logger.debug("session closed");
 
         }
     }

@@ -59,13 +59,12 @@ public class BookControllerTest {
     public void postRequestCreateUserTest() throws Exception {
         when(bookService.insertBook(any(Book.class))).thenReturn("Book Created Successfully");
 
-        mockMvc.perform(post("/books/add")
+        mockMvc.perform(post("/books")
                 .param("name", "apocalypse")
                 .param("author", "testauthor")
                 .param("price", "20"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/books"))
-                .andExpect(flash().attribute("message", "Book Created Successfully"))
-                .andExpect(flash().attribute("path", "books"));
+                .andExpect(flash().attribute("message", "Book Created Successfully"));
     }
 }

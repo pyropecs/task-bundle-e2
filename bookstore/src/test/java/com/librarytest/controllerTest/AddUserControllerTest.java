@@ -61,7 +61,7 @@ public class AddUserControllerTest {
         @Test
     public void insertUsersIntoBookTest() throws Exception{
         when(addUserService.AddUsersToBook(any(AdduserToBookForm.class))).thenReturn("Users Updated into Book Successufully");
-        mockMvc.perform(post("/addusers/insert").param("bookId", "1").param("userIds", "1","2","3")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/addusers")).andExpect(flash().attribute("message","Users Updated into Book Successufully" ));
+        mockMvc.perform(post("/addusers").param("bookId", "1").param("userIds", "1","2","3")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/addusers")).andExpect(flash().attribute("message","Users Updated into Book Successufully" ));
 
 
     }
@@ -77,7 +77,7 @@ public class AddUserControllerTest {
         users.add(user1);
         
         when(userService.getAllUsers(1)).thenReturn(users);
-        mockMvc.perform( get("/addusers/all/1").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+        mockMvc.perform( get("/addusers/users/1").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
     }    
   @Test
     public void getAddUserToPageFormTest() throws Exception{

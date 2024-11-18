@@ -26,12 +26,12 @@ public class BookService {
     public String insertBook(Book book) {
         String message;
         if (book != null ) {
-            logger.info("inserting the book into repository Book - {}",book.toString());
+            logger.info("inserting the book into repository Book - {}",book);
             message = bookRepository.insertBook(book) ? "Book Created Successfully" : "something went wrong.please try again later";
             logger.info("result - {}",message);
         } else {
             message = "no Book found";
-            logger.warn("{}",message);
+            logger.error("{}",message);
         }
         return message;
 

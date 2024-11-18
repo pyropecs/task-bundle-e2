@@ -38,7 +38,21 @@ public class AddUserController {
 
     private static final Logger logger = LogManager.getLogger();
 
-    @PostMapping("/addusers/insert")
+
+    @GetMapping("/addusers")
+    public String getAddUserToPage(Model model) {
+        logger.info("client requested add user to book page");
+        List<Book> books = bookService.getAllBooks();
+        List<User> users = userService.getAllUsers();
+        logger.info("books recieved successfully.books size - {}", books.size());
+        logger.info("users recieved successfully.users size - {}", users.size());
+        model.addAttribute("books", books);
+        model.addAttribute("users", users);
+        return "addusertobook";
+    }
+
+
+    @PostMapping("/addusers")
     public String insertUsersToBook(@Validated @ModelAttribute AdduserToBookForm form, RedirectAttributes redirectAttributes) {
         logger.info("client updating users to the book");
         String message = addUserService.AddUsersToBook(form);
@@ -47,27 +61,17 @@ public class AddUserController {
         return "redirect:/addusers";
     }
 
-    @GetMapping("addusers/all/{bookid}")
+    @GetMapping("addusers/users/{bookid}")
     @ResponseBody
     public ResponseEntity<List<User>> getUsersWithBook(@PathVariable("bookid") int bookid) {
 
-            logger.info("Client requested users with bookid");
-            List<User> users = userService.getAllUsers(bookid);
-            logger.info("Recieved users with bookId - {}",bookid);
-            return new ResponseEntity<>(users, HttpStatus.OK);
-       
+        logger.info("Client requested users with bookid");
+        List<User> users = userService.getAllUsers(bookid);
+        logger.info("Recieved users with bookId - {}", bookid);
+        return new ResponseEntity<>(users, HttpStatus.OK);
+
     }
 
-    @GetMapping("/addusers")
-    public String getAddUserToPage(Model model) {
-        logger.info("client requested add user to book page");
-        List<Book> books = bookService.getAllBooks();
-        List<User> users = userService.getAllUsers();
-        logger.info("books recieved successfully.books size - {}",books.size());
-        logger.info("users recieved successfully.users size - {}",users.size());
-        model.addAttribute("books", books);
-        model.addAttribute("users", users);
-        return "addusertobook";
-    }
+
 
 }

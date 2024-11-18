@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.library.models.Book;
 import com.library.services.BookService;
 
-
 @Controller
 public class ViewController {
 
     @Autowired
     private BookService bookService;
-   
+
     private static final Logger logger = LogManager.getLogger();
+
     @GetMapping("/")
     public String renderHomePage() {
         logger.info("Recieved /home request to fetch the homepage");
@@ -30,7 +30,7 @@ public class ViewController {
     public String viewBooksUsers(Model model) {
         logger.info("Recieved /view request to fetch the viewbookuser page");
         List<Book> books = bookService.getAllBooks();
-        logger.info("Recieved Books from bookService.getAllBooks() - {}",books);
+        logger.info("Recieved Books from bookService.getAllBooks() - {}", books);
         model.addAttribute("books", books);
         return "viewbookuser";
     }

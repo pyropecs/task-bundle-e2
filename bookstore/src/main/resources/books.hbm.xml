@@ -9,7 +9,7 @@
 		<property name="price" column="price" />
 		<set name="users" table="books_users" cascade="all" lazy="false"  >
 			<key column="bookId" />
-			<many-to-many column="userId" class="com.library.models.User"  />
+			<many-to-many  column="userId" class="com.library.models.User"  />
 		</set>
 	</class>
 </hibernate-mapping>

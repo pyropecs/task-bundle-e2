@@ -9,7 +9,7 @@ public class Book {
     private String name;
     private String author;
     private float price;
-  
+
     private Set<User> users = new HashSet<>();
 
     public int getId() {
@@ -54,9 +54,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book Id: " + id + " Book Name: " + name + " Book Author: " + author + " Book Price: "+ price; 
+        return "Book Id: " + id + " Book Name: " + name + " Book Author: " + author + " Book Price: " + price;
     }
-
-    
 
 }

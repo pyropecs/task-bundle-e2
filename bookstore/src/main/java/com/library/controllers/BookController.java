@@ -27,14 +27,14 @@ public class BookController {
         return "createform";
     }
 
-    @PostMapping("/books/add")
-    public String postBook( @ModelAttribute Book book, RedirectAttributes redirectAttributes) {
-        String message;
-        logger.info("Client adding book Object - {} ",book.toString());
-        message = bookService.insertBook(book);
-        logger.info("user object added successfully user - {}",book.toString());
+    @PostMapping("/books")
+    public String postBook(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
+        
+        logger.info("Client adding book Object - {} ", book);
+        String message = bookService.insertBook(book);
+        logger.info("Book created successfully - {}", book);
         redirectAttributes.addFlashAttribute("message", message);
-        redirectAttributes.addFlashAttribute("path", "books");
+        logger.info("Redirecting to /books");
         return "redirect:/books";
     }
 }

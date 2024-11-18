@@ -94,7 +94,7 @@ public class UserRepositoryTest {
         when(session.createQuery(anyString())).thenReturn(query);
         when(query.getResultList()).thenThrow(new RuntimeException());
         users = userRepository.getAllUsers();
-        Assert.assertNull(users);
+        Assert.assertTrue(users.isEmpty());
     }
 
     @Test

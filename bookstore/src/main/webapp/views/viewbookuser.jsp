@@ -18,12 +18,18 @@
             <tbody>
                 <%
                     List<Book> books = (List<Book>) request.getAttribute("books");
-                    if (books != null && !books.isEmpty()) {
+                    if ( !books.isEmpty()) {
                         for (Book book : books) {
                 %>
+
+                
                 <tr>
+                 
                     <td><%= book.getName() %></td>
+                 
                     <td>
+
+
                         <%
                             Set<User> users = book.getUsers();
                             if (users.isEmpty()) {
@@ -40,8 +46,12 @@
                                 }
                             }
                         %>
+
+
                     </td>
+                
                 </tr>
+
                 <%
                         }
                     } else {

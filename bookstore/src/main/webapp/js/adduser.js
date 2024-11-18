@@ -1,22 +1,25 @@
 
 async function getUsers(e) {
-    const selectedValue = e.value;
+    
+    const selectedBookValue = e.value;
     const bookSelectError = document.querySelector("#select-error");
     bookSelectError.classList.remove("show");
-    const response = await fetch(`addusers/all/${selectedValue}`);
-    const results = await response.json();
+    
+    const response = await fetch(`addusers/users/${selectedBookValue}`);
+    const users = await response.json();
     const checkBoxes = document.querySelectorAll(".checkbox");
   
     checkBoxes.forEach((checkBox) => {
-      const checkBoxValue = Number(checkBox.value);
+      const checkBoxUserId = Number(checkBox.value);
       checkBox.disabled = false;
-      const matchedResult = results.find((result) => result.id === checkBoxValue);
+      const matchedResult = users.find((user) => user.id === checkBoxUserId);
   
       if (matchedResult) {
         checkBox.checked = true;
       } else {
         checkBox.checked = false;
       }
+    
     });
   }
   
@@ -37,10 +40,13 @@ async function getUsers(e) {
   
     let isNotError = true;
     bookSelectError.classList.remove("show");
+
     if (bookSelect.value === "") {
+    
       bookSelectError.textContent = "Book is required";
       bookSelectError.classList.add("show");
       isNotError = false;
+    
     }
     return isNotError;
   }

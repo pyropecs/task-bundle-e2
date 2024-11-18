@@ -12,21 +12,21 @@
     <div class="mwb-form-main-wrapper">
         <div class="mwb-form-main-container">
             <h1>Add Users To Book</h1>
-            <form action="addusers/insert" method="post" onSubmit="return checkEmptySelected()">
+            <form action="addusers" method="post" onSubmit="return checkEmptySelected()">
                 
-                <%
-                    String message = (String) request.getAttribute("message");
-           
-                %>
-          <% if (message != null) { %>
+            <% String message = (String) request.getAttribute("message"); %>
+        
+        <% if (message != null) { %>
     	<p class="<%= "something went wrong.please try again later".equals(message) ? "error" : "success" %> text-center" id="message"><%= message %></p>
 		<% } %>
+        
                 <div class="mwb-form-group select-form no-margin">
+                    <%-- rendering books list  --%>
                     <select name="bookId" id="bookselect" onchange="getUsers(this)">
                         <option value="" selected hidden disabled>Select Book</option>
                         <%
                             List<Book> books = (List<Book>) request.getAttribute("books");
-                            if (books != null && !books.isEmpty()) {
+                            if (!books.isEmpty()) {
                                 for (Book book : books) {
                         %>
                             <option value="<%= book.getId() %>"><%= book.getName() %></option>
@@ -39,6 +39,7 @@
                             }
                         %>
                     </select>
+                
                     <div class="mwb-form-error" id="select-error">This Field Required*</div>
                 </div>
 
@@ -46,9 +47,12 @@
                     <label>Select users to Add Book</label>
                 </div>
                 <div class="mwb-form-group checkboxes">
+
+                    <%-- rendering checkboxes for all users  --%>
+
                     <%
                         List<User> users = (List<User>) request.getAttribute("users");
-                        if (users != null && !users.isEmpty()) {
+                        if ( !users.isEmpty()) {
                             for (User user : users) {
                     %>
                         <div class="checkbox-container">
@@ -63,6 +67,7 @@
                     <%
                         }
                     %>
+                    
                 </div>
 
                 <div class="mwb-form-group flex">
