@@ -28,8 +28,6 @@
                     <td><%= book.getName() %></td>
                  
                     <td>
-
-
                         <%
                             Set<User> users = book.getUsers();
                             if (users.isEmpty()) {
@@ -46,12 +44,9 @@
                                 }
                             }
                         %>
-
-
                     </td>
                 
                 </tr>
-
                 <%
                         }
                     } else {

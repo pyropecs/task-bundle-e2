@@ -22,8 +22,10 @@ public class BookController {
 
     @GetMapping("/books")
     public String getCreateBookPage(Model model) {
+
         logger.info("Recieved /books request and rendering create form as path book");
         model.addAttribute("path", "books");
+        
         return "createform";
     }
 
@@ -35,6 +37,7 @@ public class BookController {
         logger.info("Book created successfully - {}", book);
         redirectAttributes.addFlashAttribute("message", message);
         logger.info("Redirecting to /books");
+
         return "redirect:/books";
     }
 }

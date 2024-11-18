@@ -58,16 +58,18 @@ public class AddUserController {
         String message = addUserService.AddUsersToBook(form);
         logger.info("client successfully updated users and redirecting to the addusers page ");
         redirectAttributes.addFlashAttribute("message", message);
+
         return "redirect:/addusers";
     }
 
     @GetMapping("addusers/users/{bookid}")
     @ResponseBody
-    public ResponseEntity<List<User>> getUsersWithBook(@PathVariable("bookid") int bookid) {
+    public ResponseEntity<List<User>> getUsersWithBookId(@PathVariable("bookid") int bookid) {
 
         logger.info("Client requested users with bookid");
         List<User> users = userService.getAllUsers(bookid);
         logger.info("Recieved users with bookId - {}", bookid);
+        
         return new ResponseEntity<>(users, HttpStatus.OK);
 
     }

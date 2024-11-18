@@ -18,22 +18,28 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
     private static final Logger logger = LogManager.getLogger();
 
     @GetMapping("/users")
     public String createUserPage(Model model) {
+
         logger.info("recieved /users request to fetch createform");
         model.addAttribute("path", "users");
+
         return "createform";
+
     }
 
     @PostMapping("/users")
     public String createUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
+
         logger.info("Client adding user Object - {} ", user);
         String message = userService.addUser(user);
         logger.info(message);
         redirectAttributes.addFlashAttribute("message", message);
         logger.info("Redirecting to /users");
+
         return "redirect:/users";
     }
 

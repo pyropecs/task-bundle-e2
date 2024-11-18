@@ -23,15 +23,18 @@ public class ViewController {
     @GetMapping("/")
     public String renderHomePage() {
         logger.info("Recieved /home request to fetch the homepage");
+        
         return "home";
     }
 
     @GetMapping("/view")
     public String viewBooksUsers(Model model) {
+
         logger.info("Recieved /view request to fetch the viewbookuser page");
         List<Book> books = bookService.getAllBooks();
         logger.info("Recieved Books from bookService.getAllBooks() - {}", books);
         model.addAttribute("books", books);
+
         return "viewbookuser";
     }
 

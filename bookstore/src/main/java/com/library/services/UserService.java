@@ -18,7 +18,6 @@ public class UserService {
 
     public List<User> getAllUsers(int... bookidIntegers){ 
         logger.info("getting the users with bookid - {}",bookidIntegers);
-        
         return userRepository.getAllUsers(bookidIntegers);
     }
     

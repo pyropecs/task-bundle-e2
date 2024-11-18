@@ -21,12 +21,12 @@ const fieldElements = fields.map((field) =>
   document.querySelector(`#${field}`)
 );
 
-fieldErrorElements.forEach((errorElement, index) => {
-  const fieldElement = fieldElements[index];
+fieldElements.forEach((fieldElement, index) => {
+  const fieldErrorElement = fieldErrorElements[index];
 
   fieldElement.addEventListener("input", () => {
 
-    clearError(errorElement);
+    clearError(fieldErrorElement);
     if (fieldElement.id === "price") {
       validateNumber(fieldElement, "price");
     }

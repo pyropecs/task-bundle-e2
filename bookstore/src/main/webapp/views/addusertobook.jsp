@@ -21,6 +21,7 @@
 		<% } %>
         
                 <div class="mwb-form-group select-form no-margin">
+
                     <%-- rendering books list  --%>
                     <select name="bookId" id="bookselect" onchange="getUsers(this)">
                         <option value="" selected hidden disabled>Select Book</option>
@@ -39,8 +40,7 @@
                             }
                         %>
                     </select>
-                
-                    <div class="mwb-form-error" id="select-error">This Field Required*</div>
+                    <div class="mwb-form-error" id="select-error"></div>
                 </div>
 
                 <div class="center">
@@ -49,7 +49,6 @@
                 <div class="mwb-form-group checkboxes">
 
                     <%-- rendering checkboxes for all users  --%>
-
                     <%
                         List<User> users = (List<User>) request.getAttribute("users");
                         if ( !users.isEmpty()) {
@@ -67,7 +66,7 @@
                     <%
                         }
                     %>
-                    
+
                 </div>
 
                 <div class="mwb-form-group flex">

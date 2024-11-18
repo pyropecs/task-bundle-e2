@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create user</title>
+    <title>Create</title>
         <link rel="stylesheet" href="<c:url value='/styles/style.css' />" />
 
 </head>
@@ -24,8 +24,6 @@
                    : new String[]{"name", "department", "designation"};
 
 				String message = (String) request.getAttribute("message");
-				
-				
 			%>
 			 
 		<% if (message != null) { %>
@@ -38,7 +36,7 @@
 					<div class="mwb-form-error" id="<%=field%>-error"></div>
 			</div>
 			<% } %>	
-			
+
 				<div class="mwb-form-group flex">
 				<a href="/bookstore" style="width: 100%;"> <button type="button" class="mwb-form-submit-btn submit-back-btn" >Back</button></a>	
 					<button type="submit"  class="mwb-form-submit-btn" >Submit</button>
