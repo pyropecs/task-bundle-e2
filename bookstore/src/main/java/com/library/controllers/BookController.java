@@ -25,7 +25,7 @@ public class BookController {
 
         logger.info("Recieved /books request and rendering create form as path book");
         model.addAttribute("path", "books");
-        
+
         return "createform";
     }
 
@@ -35,6 +35,7 @@ public class BookController {
         logger.info("Client adding book Object - {} ", book);
         String message = bookService.insertBook(book);
         logger.info("Book created successfully - {}", book);
+        
         redirectAttributes.addFlashAttribute("message", message);
         logger.info("Redirecting to /books");
 

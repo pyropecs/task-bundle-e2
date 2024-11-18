@@ -18,7 +18,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    
+
     private static final Logger logger = LogManager.getLogger();
 
     @GetMapping("/users")
@@ -37,6 +37,7 @@ public class UserController {
         logger.info("Client adding user Object - {} ", user);
         String message = userService.addUser(user);
         logger.info(message);
+        
         redirectAttributes.addFlashAttribute("message", message);
         logger.info("Redirecting to /users");
 
