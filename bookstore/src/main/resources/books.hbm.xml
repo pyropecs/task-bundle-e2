@@ -12,4 +12,5 @@
 			<many-to-many  column="userId" class="com.library.models.User"  />
 		</set>
 	</class>
+	
 </hibernate-mapping>
