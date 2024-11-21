@@ -6,6 +6,7 @@ const fields =
     : ["name", "department", "designation"];
 
 document.addEventListener("DOMContentLoaded", () => {
+  //clearing out the error message afte 2.5 secs its been displayed 
   const messageElement = document.querySelector("#message");
 
   if (messageElement) {
@@ -35,6 +36,7 @@ fieldElements.forEach((fieldElement, index) => {
 });
 
 function validateAllFields() {
+
   let isNotError = true;
   
   fieldElements.forEach((fieldElement, index) => {
@@ -54,8 +56,9 @@ function validateAllFields() {
 }
 
 function validateLength(element, field) {
+
   const errorElement = document.querySelector(`#${field}-error`);
-  clearError(errorElement);
+  
   element.value = element.value.trim();
  
   if (element.value.length === 0) {
@@ -76,7 +79,7 @@ function validateNumber(element, field) {
   
   const value = Number(element.value); 
   const errorElement = document.querySelector(`#${field}-error`);
-  clearError(errorElement);
+
 
   if (isNaN(value)) {
     showError(errorElement, field, "should be a number");
@@ -86,7 +89,7 @@ function validateNumber(element, field) {
     showError(errorElement, field, "should be a positive number");
     
     return false;
-  } else if (element.value.length > 7) {
+  } else if (element.value.trim().length > 7) {
     showError(errorElement, field, "should be less than 7 digits");
     
     return false;
