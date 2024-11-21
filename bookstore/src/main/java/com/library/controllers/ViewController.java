@@ -54,10 +54,10 @@ public class ViewController {
 
     }
 
-    @GetMapping(value={"/viewbooks/"})
+    @GetMapping("/viewbooks/")
     @ResponseBody
     public ResponseEntity<List<Book>> getBooksBySearchField() {
-        logger.info("Client requested books with search string");
+        logger.info("Client requested all books via rest api ");
         List<Book> books = bookService.getBooksbyName();
         logger.info("Recieved all Books for rest api - {}",books);
         return new ResponseEntity<>(books, HttpStatus.OK);

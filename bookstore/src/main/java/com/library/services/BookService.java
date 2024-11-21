@@ -45,15 +45,8 @@ public class BookService {
 
     }
 
-    public List<Book> getBooksbyName(String... matcher){
-        List<Book> books = new ArrayList<>();
-        if(matcher.length == 0){
-            books = bookRepository.getAllBooks();
-        }else{
-            books = bookRepository.getAllBooks(matcher);
-        }
-       
-        return books;
+    public List<Book> getBooksbyName(String... bookName){ 
+        return bookName.length == 0 ? bookRepository.getAllBooks() : bookRepository.getAllBooks(bookName);
     }
 
 }

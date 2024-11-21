@@ -80,7 +80,7 @@ public class BookRepository {
         List<Book> books = new ArrayList<>();
 
         try {
-            String hql = matcher.length == 0 ? "Select b from Book b" : "select b from Book b where b.name like :name";
+            String hql = matcher.length == 0 ? "select b from Book b" : "select b from Book b where b.name like :name";
             Query query = session.createQuery(hql);
             if (matcher.length != 0){
                 query.setParameter("name", "%" + matcher[0] + "%");
