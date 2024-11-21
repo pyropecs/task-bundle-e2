@@ -8,17 +8,12 @@ async function getUsers(e) {
     const response = await fetch(`addusers/users/${selectedBookValue}`);
     const users = await response.json();
     const checkBoxes = document.querySelectorAll(".checkbox");
-  
+    const collectionOfUserIdsPresent = new Set(users.map(user=>user.id));
+
     checkBoxes.forEach((checkBox) => {
       const checkBoxUserId = Number(checkBox.value);
       checkBox.disabled = false;
-      const matchedResult = users.find((user) => user.id === checkBoxUserId);
-  
-      if (matchedResult) {
-        checkBox.checked = true;
-      } else {
-        checkBox.checked = false;
-      }
+      checkBox.checked = collectionOfUserIdsPresent.has(checkBoxUserId);
     
     });
   }
