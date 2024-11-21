@@ -1,5 +1,6 @@
 package com.library.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -42,6 +43,17 @@ public class BookService {
         
         return message;
 
+    }
+
+    public List<Book> getBooksbyName(String... matcher){
+        List<Book> books = new ArrayList<>();
+        if(matcher.length == 0){
+            books = bookRepository.getAllBooks();
+        }else{
+            books = bookRepository.getAllBooks(matcher);
+        }
+       
+        return books;
     }
 
 }

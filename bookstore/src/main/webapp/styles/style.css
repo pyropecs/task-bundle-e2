@@ -259,10 +259,40 @@ body {
     width: 50%;
   }
 }
+.contain {
+  position: relative;
+}
+.inp {
+  background-color: white;
+  color: #27272a;
+  border: 1px solid #52525b;
+  width: 250px;
+  border-radius: 8.75px;
+
+  padding: 12px 16px;
+  font-size: 18px;
+}
+.inp:focus {
+  border: 1px solid #2563eb;
+  outline: none;
+}
+.inp::placeholder,
+.inp::-webkit-input-placeholder,
+.inp::-ms-input-placeholder,
+.inp::-moz-input-placeholder {
+  color: #71717a;
+}
+
+.bgc{
+  width: 70%;
+  display: flex;
+  padding-bottom: 1%;
+  justify-content: right;
+}
 
 
 table {
-  width: 800px;
+  width: 70%;
   border-collapse: collapse;
   overflow: hidden;
   border-radius: 10px;

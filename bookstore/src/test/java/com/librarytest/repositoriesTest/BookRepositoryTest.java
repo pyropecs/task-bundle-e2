@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.is;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -11,20 +12,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -32,13 +32,9 @@ import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.library.dto.AdduserToBookForm;
 import com.library.models.Book;
-import com.library.models.User;
-
 import com.library.repositories.BookRepository;
 import com.library.services.AddUserService;
-import com.library.services.BookService;
 
 
 
@@ -141,7 +137,7 @@ public class BookRepositoryTest {
         when(session.createQuery(anyString())).thenReturn( query);
         when(query.getResultList()).thenReturn(books);
 
-
+        
 
          books =  bookRepository.getAllBooks();
          Assert.assertArrayEquals(books.toArray(new Book[0]), books.toArray(new Book[0]));
@@ -162,6 +158,19 @@ public class BookRepositoryTest {
     }
 
 
+    @Test
+    public void getAllBooksWithSearchStringTest(){
+        String matcher = "to";
+        String expectedHql = "select b from Book b where b.name like :name";
+        when(sessionFactory.openSession()).thenReturn(session);
+        when(session.createQuery(expectedHql)).thenReturn(query);
+        when(query.getResultList()).thenReturn(Arrays.asList(new Book(), new Book())); // Replace with actual User objects as needed
+        List<Book> result = bookRepository.getAllBooks(matcher);
+        verify(session).createQuery(expectedHql);
+        verify(session).close();
+        assertNotNull(result);
+        assertEquals(2, result.size());
+    }
 
     @Test
     public void updateBookTest(){

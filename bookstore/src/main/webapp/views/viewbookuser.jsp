@@ -8,6 +8,13 @@
 </head>
 <body>
     <div class="wrap align-center column">
+    <div class="bgc justify-right">
+  <div class="contain">
+  
+    <input class="inp" name="text" type="text" id="book-input" placeholder="search book name" />
+
+  </div>
+</div>
         <table>
             <thead>
                 <tr>
@@ -15,7 +22,7 @@
                     <th>Users</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="book-names">
                 <%
                     List<Book> books = (List<Book>) request.getAttribute("books");
                     if ( !books.isEmpty()) {
@@ -64,5 +71,6 @@
             <button class="btn back-btn">Back</button>
         </a>
     </div>
+     <script src="<c:url value='/js/viewTable.js' />"></script>
 </body>
 </html>

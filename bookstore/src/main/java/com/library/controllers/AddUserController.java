@@ -48,7 +48,6 @@ public class AddUserController {
         List<User> users = userService.getAllUsers();
         logger.info("books recieved successfully.books size - {}", books.size());
         logger.info("users recieved successfully.users size - {}", users.size());
-
         model.addAttribute("books", books);
         model.addAttribute("users", users);
 

@@ -6,15 +6,13 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-
-import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
-
 
 import com.library.models.Book;
 import com.library.repositories.BookRepository;
@@ -72,6 +70,15 @@ public class BookServiceTest {
         String message = bookService.insertBook(book2);
         assertEquals("no Book found",message);
 
+    }
+
+    @Test
+    public void getBooksByNameTest(){
+        List<Book> expectedBooks = Arrays.asList(book2);
+        when(bookRepository.getAllBooks(anyString())).thenReturn(expectedBooks);
+
+        List<Book> actualBooks = bookService.getBooksbyName(anyString());
+        assertThat(actualBooks, is(expectedBooks));
     }
 
 }

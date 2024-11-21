@@ -11,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Repository;
 
 import com.library.models.Book;
@@ -47,6 +46,8 @@ public class BookRepository {
 
     }
 
+    
+
     public Book getBookById(int bookId) {
 
         Session session = sessionFactory.openSession();
@@ -72,15 +73,18 @@ public class BookRepository {
         return book;
     }
 
-    public List<Book> getAllBooks() {
+    public List<Book> getAllBooks(String... matcher) {
 
         Session session = sessionFactory.openSession();
         logger.debug("session opened");
         List<Book> books = new ArrayList<>();
 
         try {
-
-            Query query = session.createQuery("Select b from Book b");
+            String hql = matcher.length == 0 ? "Select b from Book b" : "select b from Book b where b.name like :name";
+            Query query = session.createQuery(hql);
+            if (matcher.length != 0){
+                query.setParameter("name", "%" + matcher[0] + "%");
+            } 
             books = query.getResultList();
             logger.info("recieved books successfully Book size: {}", books.size());
 
