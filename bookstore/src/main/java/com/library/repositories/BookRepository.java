@@ -80,11 +80,14 @@ public class BookRepository {
         List<Book> books = new ArrayList<>();
 
         try {
+
             String hql = matcher.length == 0 ? "select b from Book b" : "select b from Book b where b.name like :name";
             Query query = session.createQuery(hql);
+            
             if (matcher.length != 0){
                 query.setParameter("name", "%" + matcher[0] + "%");
             } 
+            
             books = query.getResultList();
             logger.info("recieved books successfully Book size: {}", books.size());
 
@@ -98,6 +101,7 @@ public class BookRepository {
             logger.debug("session closed");
 
         }
+        
         return books;
     }
 

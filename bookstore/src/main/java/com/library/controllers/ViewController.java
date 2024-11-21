@@ -41,26 +41,30 @@ public class ViewController {
         model.addAttribute("books", books);
 
         return "viewbookuser";
-    }
+    }    
+    
     @GetMapping("/viewbooks/{search}")
     @ResponseBody
     public ResponseEntity<List<Book>> getBooksBySearchField(@PathVariable("search") String searchString) {
+
         logger.info("Client requested books with search string");
         List<Book> books = bookService.getBooksbyName(searchString);
         logger.info("Recieved books with searchString - {}", searchString);
 
         return new ResponseEntity<>(books, HttpStatus.OK);
-
-
     }
+
 
     @GetMapping("/viewbooks/")
     @ResponseBody
     public ResponseEntity<List<Book>> getBooksBySearchField() {
+
         logger.info("Client requested all books via rest api ");
         List<Book> books = bookService.getBooksbyName();
-        logger.info("Recieved all Books for rest api - {}",books);
+        logger.info("Recieved all Books via rest api - {}",books);
+
         return new ResponseEntity<>(books, HttpStatus.OK);
 
     }
+
 }
