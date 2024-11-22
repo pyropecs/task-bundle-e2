@@ -11,7 +11,7 @@
     <div class="bgc justify-right">
   <div class="contain">
   
-    <input class="inp" name="text" type="text" id="book-input" placeholder="search book name" />
+    <input class="inp" name="text" type="text" id="book-input" maxlength="100" placeholder="search book name" />
 
   </div>
 </div>

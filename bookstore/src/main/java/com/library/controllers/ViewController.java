@@ -60,7 +60,7 @@ public class ViewController {
     public ResponseEntity<List<Book>> getBooksBySearchField() {
 
         logger.info("Client requested all books via rest api ");
-        List<Book> books = bookService.getBooksbyName();
+        List<Book> books = bookService.getAllBooks();
         logger.info("Recieved all Books via rest api - {}",books);
 
         return new ResponseEntity<>(books, HttpStatus.OK);

@@ -6,7 +6,7 @@ const fields =
     : ["name", "department", "designation"];
 
 document.addEventListener("DOMContentLoaded", () => {
-  //clearing out the error message afte 2.5 secs its been displayed 
+  //clearing out the result message afte 2.5 secs its been displayed 
   const messageElement = document.querySelector("#message");
 
   if (messageElement) {
@@ -23,11 +23,13 @@ const fieldElements = fields.map((field) =>
 );
 
 fieldElements.forEach((fieldElement, index) => {
+  //adding onchange event listener
   const fieldErrorElement = fieldErrorElements[index];
 
   fieldElement.addEventListener("input", () => {
 
     clearError(fieldErrorElement);
+    validateLength(fieldElement,fields[index]);
     if (fieldElement.id === "price") {
       validateNumber(fieldElement, "price");
     }
@@ -36,7 +38,7 @@ fieldElements.forEach((fieldElement, index) => {
 });
 
 function validateAllFields() {
-
+//validate all fields when user clicks submits the form
   let isNotError = true;
   
   fieldElements.forEach((fieldElement, index) => {

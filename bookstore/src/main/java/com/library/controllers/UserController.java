@@ -28,7 +28,6 @@ public class UserController {
         model.addAttribute("path", "users");
 
         return "createform";
-
     }
 
     @PostMapping("/users")
@@ -37,7 +36,7 @@ public class UserController {
         logger.info("Client adding user Object - {} ", user);
         String message = userService.addUser(user);
         logger.info(message);
-        
+
         redirectAttributes.addFlashAttribute("message", message);
         logger.info("Redirecting to /users");
 

@@ -45,8 +45,8 @@ public class BookService {
 
     }
 
-    public List<Book> getBooksbyName(String... bookName){ 
-        return bookName.length == 0 ? bookRepository.getAllBooks() : bookRepository.getAllBooks(bookName);
+    public List<Book> getBooksbyName(String bookName){ 
+        return bookRepository.getAllBooks(bookName);
     }
 
 }
