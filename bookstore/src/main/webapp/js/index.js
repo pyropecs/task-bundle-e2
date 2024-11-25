@@ -42,7 +42,7 @@ function validateAllFields() {
   let isNotError = true;
   
   fieldElements.forEach((fieldElement, index) => {
-  
+    fieldElement.value = fieldElement.value.trim();
     if (fieldElement.id === "price") {
       const isNumberValid = validateNumber(fieldElement, "price");
       isNotError = isNotError && isNumberValid;
@@ -61,7 +61,7 @@ function validateLength(element, field) {
 
   const errorElement = document.querySelector(`#${field}-error`);
   
-  element.value = element.value.trim();
+
  
   if (element.value.length === 0) {
  
