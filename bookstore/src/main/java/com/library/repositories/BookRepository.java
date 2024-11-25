@@ -85,7 +85,7 @@ public class BookRepository {
             Query query = session.createQuery(hql);
             
             if (matcher.length != 0){
-                query.setParameter("name", "%" + matcher[0] + "%");
+                query.setParameter("name", matcher[0] + "%");
             } 
             
             books = query.getResultList();
